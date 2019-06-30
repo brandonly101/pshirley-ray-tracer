@@ -4,12 +4,30 @@
 
 using namespace std;
 
+const int nx = 960;
+const int ny = 540;
+
 int main(int argc, char const *argv[])
 {
-    vec3 test(1.0, 3.0, 7.0);
-    cout << "Lmao ";
-    cout << to_string(test.x()) + " ";
-    cout << to_string(test.y()) + " ";
-    cout << to_string(test.z()) << endl;
-    return 0;
+    cout << "P3" << endl;
+    cout << to_string(nx) + " " + to_string(ny) << endl;
+    cout << "255" << endl;
+
+    for (int j = ny - 1; j >= 0; j--)
+    {
+        for (int i = 0; i < nx; i++)
+        {
+            vec3 col(
+                float(i) / float(nx),
+                float(j) / float(ny),
+                0.2
+            );
+
+            int ir = int(256.0 * col[0]);
+            int ig = int(256.0 * col[1]);
+            int ib = int(256.0 * col[2]);
+
+            cout << ir << " " << ig << " " << ib << endl;
+        }
+    }
 }
