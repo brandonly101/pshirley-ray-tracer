@@ -2,6 +2,10 @@
 #include <cstdlib>
 #include <iostream>
 
+#ifndef VEC3H
+
+#define VEC3H
+
 using namespace std;
 
 class vec3
@@ -169,3 +173,5 @@ inline vec3 unit_vector3(vec3& v)
 {
     return v / v.length();
 }
+
+#endif
