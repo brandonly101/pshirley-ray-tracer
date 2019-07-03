@@ -10,7 +10,7 @@ using namespace std;
 class vec3
 {
 public:
-    static inline vec3 unit_vector(vec3 v);
+    static inline vec3 normalize(vec3 v);
 
     vec3() {}
     vec3(const float e0, const float e1, const float e2)
@@ -170,7 +170,7 @@ inline vec3& vec3::operator/=(const float& a)
     return *this;
 }
 
-inline vec3 vec3::unit_vector(vec3 v)
+inline vec3 vec3::normalize(vec3 v)
 {
     return v / v.length();
 }
