@@ -11,14 +11,14 @@ class HitableList : public Hitable
 public:
     HitableList() {}
     HitableList(vector<Hitable*>& l) : list(l) {}
-    ~HitableList()
-    {
-        for (int i = 0; i < list.size(); i++)
-        {
-            delete list[i];
-            list[i] = nullptr;
-        }
-    }
+    // ~HitableList()
+    // {
+    //     for (int i = 0; i < list.size(); i++)
+    //     {
+    //         delete list[i];
+    //         list[i] = nullptr;
+    //     }
+    // }
 
     bool hit(const ray& r, float tMin, float tMax, HitRecord& rec) const;
 

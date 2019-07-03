@@ -12,7 +12,12 @@ class vec3
 public:
     static inline vec3 normalize(vec3 v);
 
-    vec3() {}
+    vec3()
+    {
+        e[0] = 0;
+        e[1] = 0;
+        e[2] = 0;
+    }
     vec3(const float e0, const float e1, const float e2)
     {
         e[0] = e0;
