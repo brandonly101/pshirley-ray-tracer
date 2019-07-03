@@ -1,16 +1,17 @@
+#ifndef VEC3H
+#define VEC3H
+
 #include <cmath>
 #include <cstdlib>
 #include <iostream>
-
-#ifndef VEC3H
-
-#define VEC3H
 
 using namespace std;
 
 class vec3
 {
 public:
+    static inline vec3 unit_vector(vec3 v);
+
     vec3() {}
     vec3(const float e0, const float e1, const float e2)
     {
@@ -169,7 +170,7 @@ inline vec3& vec3::operator/=(const float& a)
     return *this;
 }
 
-inline vec3 unit_vector3(vec3& v)
+inline vec3 vec3::unit_vector(vec3 v)
 {
     return v / v.length();
 }
