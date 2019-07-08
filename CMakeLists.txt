@@ -2,11 +2,11 @@ cmake_minimum_required(VERSION 3.14.5)
 project(RayTracer CXX)
 
 if(NOT CMAKE_BUILD_TYPE)
-#	set(CMAKE_BUILD_TYPE Release)
+    set(CMAKE_BUILD_TYPE Release)
 endif()
 
 if(APPLE)
-	set(CMAKE_CXX_FLAGS "-Wall -Wextra")
+    set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 endif()
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
