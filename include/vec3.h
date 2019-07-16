@@ -7,10 +7,18 @@
 
 using namespace std;
 
+double getRand()
+{
+    return double(random()) / double(RAND_MAX);
+}
+
 class vec3
 {
 public:
     static inline vec3 normalize(vec3 v);
+    static inline vec3 randomInUnitSphere();
+    static inline vec3 reflect(const vec3& v, const vec3& n);
+    static inline vec3 randomInUnitHemisphere(const vec3& n);
 
     vec3()
     {
@@ -127,6 +135,11 @@ inline vec3 cross(const vec3& a, const vec3& b)
     );
 }
 
+inline vec3 vec3::reflect(const vec3& v, const vec3& n)
+{
+    return v - 2 * dot(v, n) * n;
+}
+
 inline vec3& vec3::operator+=(const vec3& a)
 {
     e[0] += a.e[0];
@@ -178,6 +191,67 @@ inline vec3& vec3::operator/=(const float& a)
 inline vec3 vec3::normalize(vec3 v)
 {
     return v / v.length();
+}
+
+inline vec3 vec3::randomInUnitSphere()
+{
+    vec3 p;
+
+    // do
+    // {
+    //     p = 2.0 * vec3(getRand(), getRand(), getRand()) - vec3(1, 1, 1);
+    // }
+    // while (p.squared_length() >= 1.0);
+
+    p = (2.0 * vec3(getRand(), getRand(), getRand())) - vec3(1, 1, 1);
+    p.normalize();
+    p *= pow(getRand(), 1.0 / 3.0);
+
+    // float theta = M_PI * getRand();
+    // float phi = 2.0 * M_PI * getRand();
+    // float r = getRand();
+
+    // float x = r * sin(theta) * cos(phi);
+    // float y = r * sin(theta) * sin(phi);
+    // float z = r * cos(theta);
+
+    // p = vec3(x, y, z);
+
+    return p;
+}
+
+inline vec3 vec3::randomInUnitHemisphere(const vec3& n)
+{
+    vec3 p;
+
+    float theta = M_PI / 2.0 * getRand();
+    float phi = 2.0 * M_PI * getRand();
+
+    float x = sin(theta) * cos(phi);
+    float y = sin(theta) * sin(phi);
+    float z = cos(theta);
+
+    p = vec3(x, y, z);
+
+    vec3 Up = vec3(0, 0, 1);
+    vec3 t = cross(Up, n);
+    vec3 b = cross(n, t);
+
+    x = dot(vec3(t[0], b[0], n[0]), p);
+    y = dot(vec3(t[1], b[1], n[1]), p);
+    z = dot(vec3(t[2], b[2], n[2]), p);
+
+    p = vec3(x, y, z);
+
+    return p;
+}
+
+inline vec3 lerp(const vec3& a, const vec3& b, float t)
+{
+    t = clamp(t, 0.0f, 1.0f);
+    vec3 result;
+    result = (1.0 - t) * a + t * b;
+    return result;
 }
 
 #endif
